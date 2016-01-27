@@ -17,7 +17,7 @@ import org.jdesktop.swingx.JXTable;
  * Date values will be sorted as Dates
  * etc
  * 
- * (c) Copyright | Sotiris Doudis | 2015-2016
+ * (c) Copyright | Sotiris Doudis | 2015-2016 | All rights reserved
  * Github: RiflemanSD - https://github.com/RiflemanSD
  * 
  * @author RiflemanSD
@@ -96,6 +96,28 @@ public class JXSortableTable extends JXTable {
         this.packAll();
     }
 
+    public void removeAllRows() {
+        SortableTableModel model = (SortableTableModel) this.getModel();
+
+        for (int i = 0; model.getRowCount() != 0; i++) {
+            if (i > model.getRowCount()) i = 0;
+            //System.out.println(getRowAt(i)[0]);
+            model.removeRow(0);
+        }
+    }
+    
+    public Object[] getRowAt(int row) {
+        int colNumber = this.getColumnCount();
+
+        Object[] result = new Object[colNumber];
+
+        for (int i = 0; i < colNumber; i++) {
+            result[i] = (Object) this.getModel().getValueAt(row, i);
+        }
+
+        return result;
+    }
+    
     private static DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.SHORT, Locale.JAPAN);
 
     private static Date getDate(String dateString) {
