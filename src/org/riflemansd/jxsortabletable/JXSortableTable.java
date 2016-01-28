@@ -93,7 +93,7 @@ public class JXSortableTable extends JXTable {
 
         m.addRow(objects);
 
-        this.packAll();
+        //this.packAll();
     }
 
     public void removeAllRows() {
@@ -103,6 +103,15 @@ public class JXSortableTable extends JXTable {
             if (i > model.getRowCount()) i = 0;
             //System.out.println(getRowAt(i)[0]);
             model.removeRow(0);
+        }
+    }
+    
+    public void deleteAllRows() {
+        try {
+            SortableTableModel model = (SortableTableModel) this.getModel();
+            model.setNumRows(0); 
+        } catch(Exception e) {
+            System.err.println(e);
         }
     }
     
