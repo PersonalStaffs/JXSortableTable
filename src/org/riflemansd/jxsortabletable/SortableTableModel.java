@@ -20,6 +20,7 @@ public class SortableTableModel extends DefaultTableModel {
     public SortableTableModel() {
     }
 
+    @Override
     public Object getValueAt(int row, int col) {
         int rowIndex = row;
         if (indexes != null) {
@@ -28,6 +29,7 @@ public class SortableTableModel extends DefaultTableModel {
         return super.getValueAt(rowIndex, col);
     }
 
+    @Override
     public void setValueAt(Object value, int row, int col) {
         int rowIndex = row;
         if (indexes != null) {
@@ -40,7 +42,9 @@ public class SortableTableModel extends DefaultTableModel {
         if (sorter == null) {
             sorter = new TableSorter(this);
         }
-        sorter.sort(column, isAscent);
+        getIndexes();
+        indexes = sorter.sort(column, isAscent);
+        
         fireTableDataChanged();
     }
 

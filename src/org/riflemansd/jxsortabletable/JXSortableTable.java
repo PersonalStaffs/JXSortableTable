@@ -26,9 +26,12 @@ import org.jdesktop.swingx.JXTable;
 public class JXSortableTable extends JXTable {
     private Class[] classes;
     private int numberOfColumns;
+    private int currSortColumn;
+    private boolean asc;
 
     public JXSortableTable(String columns, Object... dataTypes) {
-        
+        currSortColumn = 1;
+        asc = true;
         //setLayout(new BorderLayout());
         String[] c = columns.split(",");
         numberOfColumns = c.length;
@@ -97,6 +100,7 @@ public class JXSortableTable extends JXTable {
     }
 
     public void removeAllRows() {
+        System.out.println("Hello");
         SortableTableModel model = (SortableTableModel) this.getModel();
 
         for (int i = 0; model.getRowCount() != 0; i++) {
@@ -104,6 +108,14 @@ public class JXSortableTable extends JXTable {
             //System.out.println(getRowAt(i)[0]);
             model.removeRow(0);
         }
+        //model.getIndexes();
+        System.out.println(model.getRowCount());
+    }
+    
+    public void sort() {
+        SortableTableModel model = (SortableTableModel) this.getModel();
+        
+        model.sortByColumn(currSortColumn, asc);
     }
     
     public void deleteAllRows() {
@@ -168,6 +180,9 @@ public class JXSortableTable extends JXTable {
             }
             ((SortableTableModel) header.getTable().getModel())
                     .sortByColumn(sortCol, isAscent);
+            
+            currSortColumn = sortCol;
+            asc = isAscent;
         }
 
         public void mouseReleased(MouseEvent e) {

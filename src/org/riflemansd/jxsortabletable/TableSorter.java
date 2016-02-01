@@ -5,10 +5,7 @@
  */
 package org.riflemansd.jxsortabletable;
 
-import java.awt.*;
 import java.util.*;
-import javax.swing.*;
-import javax.swing.table.*;
 
 /**
  * @version 1.0 02/25/99
@@ -22,7 +19,7 @@ public class TableSorter {
     }
 
     //n2 selection
-    public void sort(int column, boolean isAscent) {
+    public int[] sort(int column, boolean isAscent) {
         int n = model.getRowCount();
         int[] indexes = model.getIndexes();
 
@@ -42,6 +39,44 @@ public class TableSorter {
             int tmp = indexes[i];
             indexes[i] = indexes[k];
             indexes[k] = tmp;
+        }
+        
+        return indexes;
+    }
+
+    private int partition(int arr[], int left, int right) {
+        int i = left, j = right;
+        int tmp;
+        int pivot = arr[(left + right) / 2];
+
+        while (i <= j) {
+            while (arr[i] < pivot) {
+                i++;
+            }
+            while (arr[j] > pivot) {
+                j--;
+            }
+
+            if (i <= j) {
+                tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                i++;
+                j--;
+            }
+        };
+        return i;
+    }
+
+    private void quickSort(int arr[], int left, int right) {
+        int index = partition(arr, left, right);
+        
+        if (left < index - 1) {
+            quickSort(arr, left, index - 1);
+        }
+
+        if (index < right) {
+            quickSort(arr, index, right);
         }
     }
 
