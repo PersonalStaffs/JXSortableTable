@@ -23,8 +23,8 @@ public class JXSTable extends javax.swing.JPanel {
         initComponents();
         
         JXSortableTable table = new JXSortableTable("ID,Name,Cost", 0, "string", 1000);
-        table.addRow(0, "George", 1000);
-        table.addRow(1, "Pete", 1200);
+        table.addRow(0, "<html><font color='red'>George</font></html>", 1000);
+        table.addRow(1, "Peter", 1200);
         table.addRow(2, "Jonh", 950);
         
         JScrollPane pane = new JScrollPane(table);
