@@ -28,7 +28,7 @@ public class JXSortableTable extends JXTable {
     private boolean asc;
 
     public JXSortableTable(String columns, Object... dataTypes) {
-        currSortColumn = 1;
+        currSortColumn = 0;
         asc = true;
         //setLayout(new BorderLayout());
         String[] c = columns.split(",");
@@ -50,7 +50,9 @@ public class JXSortableTable extends JXTable {
                 classes[i] = String.class;
             } else if (dataTypes[i] instanceof Date) {
                 classes[i] = Date.class;
-            } else {
+            } else if (dataTypes[i] instanceof Boolean) {
+                classes[i] = Boolean.class;
+            } else { 
                 classes[i] = String.class;
             }
         }
@@ -93,7 +95,7 @@ public class JXSortableTable extends JXTable {
 //            col.setCellEditor(new MyTableCellEditor());
 //        }
         
-        this.getColumnModel().getColumn(0).setCellRenderer(new StatusColumnCellRenderer());
+        //this.getColumnModel().getColumn(0).setCellRenderer(new StatusColumnCellRenderer());
     }
 
     public class StatusColumnCellRenderer extends DefaultTableCellRenderer {
