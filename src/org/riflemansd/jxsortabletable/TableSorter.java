@@ -97,10 +97,15 @@ public class TableSorter {
                     String s1 = (String) o1;
                     String s2 = (String) o2;
 
-                    double n1 = Double.parseDouble(s1.replace("R", ""));
-                    double n2 = Double.parseDouble(s2.replace("R", ""));
+                    try {
+                        double n1 = Double.parseDouble(s1.replace("R", ""));
+                        double n2 = Double.parseDouble(s2.replace("R", ""));
 
-                    return compare(n1, n2);
+                        return compare(n1, n2);
+                    }
+                    catch (Exception e) {
+                        return (s1.compareTo(s2));
+                    }
                 }
             }
             Class type = model.getColumnClass(column);
